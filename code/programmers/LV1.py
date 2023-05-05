@@ -194,10 +194,21 @@ def check_num(num): # 약수의 개수를 구하기 위한 식
  
  
  
- 
- 
- 
- 
- 
- 
  ################################################
+ 
+ 
+ 
+ #폰켓몬 
+ 
+ 
+ def solution(nums):
+    answer = 0
+    N = len(nums)
+    nums = set(nums)
+    answer = len(nums)
+    
+    if len(nums) > N/2:
+        answer = N/2
+    return answer
+   
+####################################
