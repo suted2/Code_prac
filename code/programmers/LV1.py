@@ -163,3 +163,41 @@ def solution(a, b):
     return week[tmp % 7]
    
  ###############################################
+ 
+ 
+ 
+ #약수의 개수와 덧셈 
+ 
+ 
+ 
+ def solution(left, right):
+    answer = 0
+    
+    for i in range(left, right+1):
+        tmp = check_num(i)
+        if tmp % 2 ==0: #짝수면 더하고 
+            answer += i
+            
+        else:
+            answer -= i #홀수면 빼기 
+    return answer
+
+
+
+def check_num(num): # 약수의 개수를 구하기 위한 식 
+    cnt = 0
+    for i in range(1,num+1):
+        if num % i ==0:
+            cnt +=1
+            
+    return cnt
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ################################################
