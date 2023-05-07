@@ -229,3 +229,44 @@ def solution(arr1, arr2):
     return answer
    
 ################################
+
+
+
+
+# 모의고사
+
+def solution(answers):
+    answer = []
+    #1번 학생, 2번학생, 3번학생 룰 
+    rule1 = [1,2,3,4,5]
+    rule2 = [2,1,2,3,2,4,2,5]
+    rule3 = [3,3,1,1,2,2,4,4,5,5]
+    
+    cnt1 = check(answers, rule1)
+    cnt2 = check(answers, rule2)
+    cnt3 = check(answers, rule3)
+    tmp = [cnt1,cnt2,cnt3]
+    max_value = max(tmp)
+
+    for idx, i in enumerate(tmp):
+        if  i == max_value:     
+            answer.append(idx+1)
+    return sorted(answer)
+
+def check(answers, rule):
+    cnt = 0 
+    if len(rule) < len(answers):
+        tmp = rule * (len(answers) // len(rule) + 1)
+        tmp = tmp[:len(answers)]
+    elif len(rule) == len(answers):
+        tmp = rule
+    else:
+        tmp = rule[:len(answers)]
+        
+    for i in range(len(answers)):
+        if answers[i] == tmp[i]:
+            cnt += 1 
+    
+    return cnt 
+    
+#############################################
