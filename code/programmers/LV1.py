@@ -270,3 +270,31 @@ def check(answers, rule):
     return cnt 
     
 #############################################
+
+
+
+
+# 3진법 뒤집기
+
+def solution(n):
+    answer = 0
+    tmp = []
+    while True:
+        tmp.append(str(n % 3))
+        n //= 3
+        
+        if n < 1:
+            break
+
+    num = 1 
+    tmp = tmp[::-1]
+    for i in tmp:
+        answer += int(i) * num
+        num *= 3
+        
+    return answer
+   
+   
+########################################
+
+
