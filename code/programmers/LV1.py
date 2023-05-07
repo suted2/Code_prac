@@ -212,3 +212,20 @@ def check_num(num): # 약수의 개수를 구하기 위한 식
     return answer
    
 ####################################
+
+
+
+# 행렬의 덧셈
+
+def solution(arr1, arr2):
+    answer = []
+    for i,j in zip(arr1, arr2):
+        tmp = []
+        for x,y in zip(i,j):
+            
+            tmp.append(x+y)
+        answer.append(tmp)
+            
+    return answer
+   
+################################
