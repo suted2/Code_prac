@@ -316,3 +316,22 @@ def solution(s):
  
 ##########################################
 
+
+
+# 최소 직사각형
+
+def solution(sizes):
+    answer = 0
+    tmp = []
+    tmp1 = []
+    
+    for x,y in sizes:
+        tmp.append(min(x,y))
+        tmp1.append(max(x,y))
+        
+    
+    answer = max(tmp) * max(tmp1)
+    return answer
+   
+   
+#############################################
