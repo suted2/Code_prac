@@ -360,3 +360,35 @@ def solution(a, b, n):
    
    
 ##############################################
+
+
+
+#둘만의 암호
+
+def solution(s, skip, index):
+    
+    # 아스키 코드 상으로 a는 97 z는 122이다. 
+    
+    tmp_skip = []
+    for i in skip:
+        tmp_skip.append(ord(i))
+    
+    tmp_skip = set(tmp_skip)
+    tmp_skip = list(tmp_skip)
+    tmp_skip.sort() # 스킵 문자열의 아스키 코드를 저장하는 폴더 만듬. 
+    
+    # 정답을 위한 리스트 만듬
+    tmp = []
+    for i in range(97,123):
+        if i not in tmp_skip:
+            tmp.append(i) 
+    
+    # 실제 문자열을 돌며 정답값 찾기 
+    answer = [] 
+    for j in s:
+        answer.append(chr(tmp[(tmp.index(ord(j)) + index) % len(tmp)]))
+        ## 나머지 == 인덱스 번호가 된다. 
+
+    return ''.join(answer)
+   
+#####################################
