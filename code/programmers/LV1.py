@@ -392,3 +392,28 @@ def solution(s, skip, index):
     return ''.join(answer)
    
 #####################################
+
+
+# 추억 점수 
+
+
+def solution(name, yearning, photo):
+    answer = []
+    tmp = {} # 딕셔너리를 통해 사람당 그리움을 지정한다. 
+    
+    for i in range(len(name)):
+        tmp[name[i]] = yearning[i]
+    
+    for i in photo: # photo 배열에는 여러개의 사진이 들어있음. 사진 하나당
+        score = 0 #사진 하나당 스코어 계산
+        for j in i: #사진 하나에 사람 한명씩 탐색하며
+            if j in tmp: #딕셔너리에 있다면 == 그리움 점수가 있다면 
+                score += tmp[j]
+            
+        answer.append(score)
+    
+    
+    return answer
+   
+   
+ #######################################
