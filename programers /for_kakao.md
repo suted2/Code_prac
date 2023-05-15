@@ -180,3 +180,5 @@ def solution(str1, str2):
 
 🤔
 1. 위에서는 set을 사용 union, intersection을 하나씩 구했다면 counter함수를 import한다하여도 구할 수 있음.
+2. 두개의 합집합의 len을 예외 처리도 가능하지만, 카카오 해설을 본경우
+3. except ZeroDivisionError: 의 경우처럼 예외처리를 해주는 방식을 원했던 문제같다. 
