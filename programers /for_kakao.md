@@ -82,3 +82,101 @@ def solution(s):
 
 1. 정렬하는 과정에서 sort(key = len) 만 써도 사용이 가능하다. 
 2. 파싱하는 과정에서 정규표현식을 쓰거나, 앞뒤를 제거하고 잘 나눠보자. 
+
+
+
+---
+### 3. 뉴스 클러스터링 
+
+
+```python
+def solution(str1, str2):
+    answer = 0
+    # 1. 대,소문자 구분없음. 
+    # 2. 2글자씩 짜르 면서 특수문자 필터링 해야함. 
+    # 3. 중복도 허용된다. 
+    # 4. 값에는 65536을 곱하고 소수점자리는 버림한다. 
+    # 5. 둘다 공집합일 경우에는 1 로 정의한다. 
+    temp = [] # 두 글자씩 pair를 만들 자리 
+    
+    str1 = str1.lower()
+    str2 = str2.lower()
+    
+    
+    for i in range(len(str1)):
+        if str1[i].isalpha() and str1[i+1].isalpha(): # 알파벳이 있는 것만 넣음. 
+            temp.append(str1[i:i+2])
+        if i == len(str1)-2:
+            break        
+
+
+    temp2 = [] # str2에 대해서 위와 같이 실행 
+    
+    for j in range(len(str2)):
+        if str2[j].isalpha() and str2[j+1].isalpha(): # 알파벳이 있는 것만 넣음. 
+        
+           temp2.append(str2[j:j+2])
+        if j == len(str2)-2:
+            break
+    
+    # 교집합 구하기 
+    intersec = set(temp) & set(temp2)
+    # 합집합 구하기 
+    union = set(temp) | set(temp2)
+    
+    # 합집합 == 0 인것 예외처리 먼저해줌. 
+    if len(union) == 0: 
+        return 1*65536
+    
+    #자카드 구하기 
+    #교집합. 
+
+        
+    jac_i = sum([min(temp.count(x), temp2.count(x)) for x in intersec])
+    #합집합
+    jac_u = sum([max(temp.count(y), temp2.count(y)) for y in union])
+
+    answer = int(jac_i / jac_u * 65536)
+    
+    return answer
+
+```
+
+
+*다른 풀이*
+
+
+```python
+from collections import Counter
+
+def solution(str1, str2):
+    str1_low = str1.lower()
+    str2_low = str2.lower()
+    
+    str1_lst = []
+    str2_lst = []
+    
+    for i in range(len(str1_low)-1):
+        if str1_low[i].isalpha() and str1_low[i+1].isalpha():
+            str1_lst.append(str1_low[i] + str1_low[i+1])
+    for j in range(len(str2_low)-1):
+        if str2_low[j].isalpha() and str2_low[j+1].isalpha():
+            str2_lst.append(str2_low[j] + str2_low[j+1])
+            
+    Counter1 = Counter(str1_lst)
+    Counter2 = Counter(str2_lst)
+    
+    inter = list((Counter1 & Counter2).elements())
+    union = list((Counter1 | Counter2).elements())
+    
+    if len(union) == 0 and len(inter) == 0:
+        return 65536
+    else:
+        return int(len(inter) / len(union) * 65536)
+
+
+```
+
+
+🤔
+1. 위에서는 set을 사용 union, intersection을 하나씩 구했다면 counter함수를 import한다하여도 구할 수 있음.
