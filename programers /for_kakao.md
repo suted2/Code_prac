@@ -182,3 +182,52 @@ def solution(str1, str2):
 1. 위에서는 set을 사용 union, intersection을 하나씩 구했다면 counter함수를 import한다하여도 구할 수 있음.
 2. 두개의 합집합의 len을 예외 처리도 가능하지만, 카카오 해설을 본경우
 3. except ZeroDivisionError: 의 경우처럼 예외처리를 해주는 방식을 원했던 문제같다. 
+
+
+
+
+### 4. k진수에서 소수 개수 구하기 
+
+```python
+def solution(n, k):
+    answer = 0
+    n = change_num(n,k)
+    temp = [] 
+    temp = n.split('0') # 0을 기준으로 숫자가 나눠지기에 0으로 split한다면 check 해야하는 숫자만 남을듯. 
+    #중간에 0이있는 숫자 역시 거를 수 있음. 
+    
+    for i in temp: 
+        if i.isnumeric():
+            i = int(i)
+            if i > 1:
+                if is_prime(i):
+                    answer += 1
+    
+    return answer
+
+
+
+def is_prime(num): # 소수인지 아닌지를 체크하는 함수. 
+    flag = True
+    for i in range(2, int(num**0.5)+1): # 소수 구하기 위해서 제곱근까지 search해도 된다. 
+        if num % i == 0:
+            flag = False
+            
+    return flag 
+        
+    
+def change_num(n, k): #10진법에서 원하는 k진수로 바꾸는 방식. 
+    answer = []
+    while True:
+        answer.append(str(n%k))
+        n //= k
+        if n < k:
+            answer.append(str(n))
+            break
+            
+    
+    return ''.join(answer[::-1])
+        
+    
+
+```
