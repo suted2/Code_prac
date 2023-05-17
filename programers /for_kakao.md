@@ -231,3 +231,92 @@ def change_num(n, k): #10진법에서 원하는 k진수로 바꾸는 방식.
     
 
 ```
+
+
+
+### 파일명 정렬 
+
+1. 해당 문제의 포인트는 안전정렬이였다.
+2. 기본적으로 C++ , python 은 안전정렬을 지원한다. 
+3. 알고리즘 적으로는  
+   > 안전정렬 : 버블 , 삽입, 병합 병렬 ... 
+   > 불안정정렬: quick sort, heap sort
+이 존재한다. 
+![image](https://github.com/suted2/Code_prac/assets/101646531/bf461afa-35f7-4585-a3c6-0355b730e1d0)
+
+
+
+```python
+def solution(files):
+    answer = []
+    
+    # 파일명에 포함 가능은 영어 대소문자, 숫자, 공백 , '.' , '-' 뿐이다. 
+    # 파일명은 영문자로 시작하고 숫자가 최소 하나 들어있다. 
+    # head -> 오직 영어 , number -> 0 ~ 99999 사이 숫자 tail 은 random 하게 존재 가능 
+    # head 비교시에는 대소문자 구분하지 않는다. 
+    # tail 은 정렬에 영향을 미치지 않는다. 
+    
+    for file in files: 
+        tmp_idx = 0
+        temp = []
+        for i in file: # 맨처음 숫자가 나오는 부분을 number의 시작으로 보고 split하면 될듯하다.
+            if i.isnumeric():
+                tmp_idx = file.index(i)
+                break
+        # 가지고 있는 index를 기준으로 나눈다. 
+        temp.append(file[:tmp_idx])
+        
+        ## 위에서 head부분 골랐으니 이제 number , tail 부분 구별한다. 
+        tmp_idx2 = 0 
+        for j in file[tmp_idx:]:
+            if not j.isnumeric():
+                tmp_idx2 = file.index(j)
+                break
+        temp.append(file[tmp_idx:tmp_idx2])
+        temp.append(file[tmp_idx2:])
+        
+        answer.append(temp)        
+    
+    answer = sorted(answer, key = lambda x: (x[0].lower(), int(x[1]) ) ) 
+    
+    submission = [] 
+    for x in answer:
+        submission.append(''.join(x))
+    
+    
+    return submission
+
+```
+
+
+🤔 
+
+- 진행한 코드에서 head, num ,tail을 나누는 과정에서 num 의 자리수가 한정 되어있지만 예외를 처리하지 못함. 
+
+
+*다른 풀이*
+
+```python
+import re
+def solution(files):
+    temp = [re.split(r"([0-9]+)", s) for s in files]
+    
+    sort = sorted(temp, key = lambda x: (x[0].lower(), int(x[1])))
+    
+    return temp
+
+```
+
+> 정규표현식으로 숫자가 [0-9] 한개 이상인 부분을 기준으로 spilt하면 3가지가 나온다. 
+
+
+```python
+
+import re
+
+def solution(files):
+    a = sorted(files, key=lambda file : int(re.findall('\d+', file)[0]))
+    b = sorted(a, key=lambda file : re.split('\d{1,5}', file.lower())[0])
+    return b
+
+```
