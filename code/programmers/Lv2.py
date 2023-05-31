@@ -157,3 +157,48 @@ def change(num):
         
         
 ###############################################
+
+
+
+#영어 끝말잇기 
+
+def solution(n, words):
+    answer = []
+    temp = {} # 중복 단어인지 체크하기!
+    
+    temp[words[0]] = 1 # 처음꺼 먼저 넣고 시작하자. 
+    idx = 1 # 실패가 발생한 지점 체크하기
+    
+    while True: 
+        
+        if words[idx-1][-1] != words[idx][0]:
+            idx += 1  # 번쨰를 구하기 위해 미리 더함 
+            break
+        else:
+            if words[idx] in temp:
+                idx += 1 # 번쨰를 구하기 위해 미리 더함 
+                break
+            else:
+                temp[words[idx]] = 1
+        
+
+        if idx == len(words)-1:
+            idx = 0 
+            break
+        idx += 1
+
+    if idx == 0:
+        return [0,0]
+    
+    else:
+        person = 0 
+        th = 0 
+        if idx % n == 0:
+            person = n
+            th = idx // n
+        else:
+            person = idx % n 
+            th = idx // n + 1 
+        
+        return [person, th]
+############################################
