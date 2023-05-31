@@ -120,3 +120,40 @@ def solution(n):
 
 
 ####################################
+
+
+
+
+# 다음 큰 숫자 
+
+def solution(n):
+    answer = 0
+    ones_ = change(n).count('1') # 현재 숫자의 1의 개수를 구한다.  
+    
+    # 현재 숫자보다 큰 숫자이니까 앞으로 가면서 check 한다 . 
+    
+    while True:
+        tmp = 0
+        n += 1
+        
+        if change(n).count('1') == ones_:
+            answer = n
+            break
+    
+    
+    return answer
+
+
+def change(num):
+    answer = []
+    while True:
+        answer.append(str(num % 2))
+        num //= 2
+    
+        if num < 1:
+            break
+            
+    return ''.join(answer[::-1])
+        
+        
+###############################################
