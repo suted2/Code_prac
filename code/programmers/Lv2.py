@@ -96,3 +96,27 @@ def change_num(num): # 2진법으로 바꾸는 함수
 
 
 ##################################
+
+
+#숫자의 표현 
+
+def solution(n):
+    answer = 0
+    # 완전 탐색의 방법 
+    for i in range(1, n+1): # 기준이 되는 숫자 for 문
+        sum = 0
+        for j in range(i, n+1): #기준이 되는 숫자에서 연속되게 더한다. 
+            sum += j
+            if sum == n: # 정확하게 n이 나오면 answer +=1 
+                answer+=1 
+                break
+            elif sum > n: # n을 한번 초과하면 답이 나올 가능성이 없어서 바로 break 
+                break
+    return answer
+    
+    
+    
+    return answer
+
+
+####################################
