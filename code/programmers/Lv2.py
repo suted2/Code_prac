@@ -33,3 +33,33 @@ def solution(s):
   
   
 #####################################
+
+
+
+# 올바른 괄호 
+
+
+
+def solution(s):
+    answer = True
+    
+    s = list(s)
+    temp = [] # ')'저장하다가 '(' 나오면 하나씩 지울 스택 
+    temp2 = []
+    if s[0] == ')' or s[-1] == '(':
+        return False
+    
+    else:
+        for _ in range(len(s)):
+            if s[-1] == ')':
+                temp.append(')')
+                s.pop()
+            else:
+                if temp:
+                    s.pop()
+                    temp.pop()
+                else:
+                    return False
+    return answer
+
+#################################################
