@@ -63,3 +63,36 @@ def solution(s):
     return answer
 
 #################################################
+
+
+
+# 이진변환 반복하기 
+
+def solution(s):
+    cnt = 0 # 이진 변환의 실행 횟수를 체크할 곳 
+    cnt_zero = 0 # 사라진 0의 개수 체크할 곳     
+    while True:
+
+
+        cnt_zero += s.count('0')
+        s = s.replace('0', '') #이진변화(1) 0을 제거 
+
+        s = ''.join(change_num(len(s))) #남은 문자열의 길이를 변환 ! 
+        cnt += 1 # 실행횟수 + 1
+        if s == '1': 
+            break
+    
+    
+    return [cnt, cnt_zero]
+
+def change_num(num): # 2진법으로 바꾸는 함수 
+    temp = []
+    while True: 
+        temp.append(str(num % 2))
+        num //= 2
+        if num < 1: 
+            break
+    return temp[::-1]
+
+
+##################################
