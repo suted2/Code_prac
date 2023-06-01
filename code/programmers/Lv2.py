@@ -202,3 +202,24 @@ def solution(n, words):
         
         return [person, th]
 ############################################
+
+
+# 카펫 
+
+def solution(brown, yellow):
+    answer = []
+    #가로가 무조건 세로 이상이다. 
+    
+    for i in range(1, int(yellow**0.5)+1):
+        if yellow % i ==0:
+            answer.append([i, yellow // i])
+    
+    tmp = []
+    
+    for j in answer:
+        if (j[0]+2) * (j[1]+2) == (brown + yellow):
+            return [j[1]+2, j[0]+2]
+            
+    
+ ################################################
+
