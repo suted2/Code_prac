@@ -293,4 +293,37 @@ def solution(n):
         answer[i] = answer[i-1]+answer[i-2]
     return answer[n]%1234567
 
-###############################3
+###############################
+
+
+
+# 괄호 회전
+
+def check(s):
+    stack = []
+    for i in s:
+        if len(stack) == 0: 
+            stack.append(i)
+        else:
+            if i == ")" and stack[-1] == "(":
+                stack.pop()
+            elif i == "]" and stack[-1] == "[":
+                stack.pop()
+            elif i == "}" and stack[-1] == "{":
+                stack.pop()
+            else:
+                stack.append(i)
+    return 1 if len(stack) ==0 else 0 
+
+
+def solution(s):
+    answer =0 
+    
+    for i in range(len(s)):
+        if check(s): 
+            answer += 1
+        s = s[1:] + s[:1]
+    return answer
+
+
+##############
